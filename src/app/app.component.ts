@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { EventEmitter } from 'protractor';
 import { Store, Action } from '@ngrx/store';
+import { IncrementarAction, DecrementarAction } from './contador/contador.actions';
 
 interface AppState {
   contador: number
@@ -20,26 +21,21 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.subscribe( state => {
-      this.contador = state.contador;
+    this.store.select('contador').subscribe( state => {
+      this.contador = state;
+      console.log(state);
     })
   }
 
   incrementar() {
-    // this.contador++;
-    const accion: Action = {
-      type: 'INCREMENTAR'
-    }
+    const action = new IncrementarAction();    
 
-    this.store.dispatch(accion);
+    this.store.dispatch(action);
   }
 
   decrementar() {
-    // this.contador--;
-    const accion: Action = {
-      type: 'DECREMENTAR'
-    }
+    const action = new DecrementarAction();
 
-    this.store.dispatch(accion);
+    this.store.dispatch(action);
   }
 }
