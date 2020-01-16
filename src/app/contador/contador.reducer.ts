@@ -1,4 +1,5 @@
 import { INCREMENTAR, DECREMENTAR, MULTIPLICAR, DIVIDIR, actions, RESET } from './contador.actions';
+import { ActionsSubject } from '@ngrx/store';
 
 export function contadorReducer ( state: number = 10, action: actions) {
 
